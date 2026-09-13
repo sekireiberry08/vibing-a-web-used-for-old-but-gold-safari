@@ -3,238 +3,209 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Thư viện tài liệu</title>
+    <title>Tài liệu học</title>
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <main class="finder">
-      <aside class="sidebar">
-        <p class="eyebrow">TÀI LIỆU HỌC TẬP</p>
-        <h1>Thư viện</h1>
-        <button class="sidebar-item active" id="all-folders" type="button">
-          Tất cả thư mục
+    <main class="finder" aria-live="polite">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">Kho tài liệu</p>
+          <h1>Tài liệu học</h1>
+        </div>
+        <div class="window-controls" aria-hidden="true">
+          <span></span><span></span><span></span>
+        </div>
+      </header>
+
+      <nav class="toolbar" aria-label="Điều hướng thư mục">
+        <button
+          class="back-button"
+          type="button"
+          aria-label="Quay lại"
+          disabled
+        >
+          <span aria-hidden="true">&#8592;</span>
+          <span>Quay lại</span>
         </button>
-        <p class="sidebar-label">FAVORITES</p>
-        <div id="folder-sidebar"></div>
-      </aside>
+        <div class="breadcrumb" id="breadcrumb"></div>
+      </nav>
 
       <section class="content">
-        <header class="toolbar">
+        <div class="content-heading">
           <div>
-            <nav
-              class="breadcrumbs"
-              id="breadcrumbs"
-              aria-label="Đường dẫn thư mục"
-            ></nav>
-            <p class="subtitle" id="item-count"></p>
+            <p class="location-label">Đang xem</p>
+            <h2 id="view-title">Các môn học</h2>
           </div>
-          <label class="search">
-            <span aria-hidden="true">⌕</span>
-            <input
-              id="search"
-              type="search"
-              placeholder="Tìm tài liệu"
-              aria-label="Tìm tài liệu"
-            />
+          <label class="search-box">
+            <span aria-hidden="true">&#128269;</span>
+            <input id="search-input" type="search" placeholder="Tìm tài liệu" />
           </label>
-        </header>
-        <div class="file-list" id="file-list"></div>
+        </div>
+        <div class="items" id="items"></div>
+        <p class="empty-state" id="empty-state" hidden>
+          Không tìm thấy tài liệu phù hợp.
+        </p>
       </section>
+      <footer class="statusbar" id="statusbar"></footer>
     </main>
+
     <script>
-      var library = {
-        CNPM: {
-          files: [
-            "01_Ch1 Introduction_2025.pdf",
-            "02_Ch2 Software Processes.pdf",
-            "03_Ch3_4 Requirements Engineering_2026.pdf",
-            "2410046 - TrinhQuocAn.pdf",
-            "SE_HK261_TeachingPlan - PLAN.pdf",
-            "spec_cnpm.pdf",
-          ],
-        },
-        KTLT: {
-          files: [
-            "01-Introduction_to_Computer.pdf",
-            "02-Basic.pdf",
-            "03-Operations.pdf",
-            "04-Libraries.pdf",
-            "05-Control_Flow_If_else.pdf",
-            "06-Control_Flow_Loop.pdf",
-            "07-Array_Structure_Pointer.pdf",
-            "08-Function.pdf",
-            "09-Recursive.pdf",
-            "10-Class.pdf",
-            "11-Operator overloading and Inheritance.pdf",
-            "12-Template.pdf",
-            "13-Polymorphism.pdf",
-            "14-Vector_Iterator.pdf",
-          ],
-        },
-        "Lịch sử Đảng": {
-          files: [
-            "CHUONG 1.pdf",
-            "DCMH.SP1039_History of Vietnamese Communist Party.pdf",
-            "GIÁO TRÌNH_Lịch sử ĐCS VN_NXBCTQG.pdf",
-            "SP1039_CĐR TỪNG CHƯƠNG_TRỌNG TÂM.pdf",
-          ],
-        },
-        "Mạng máy tính": {
-          files: [
-            "1_Sample_NetApp.pdf",
-            "Chapter_1_v8.0.pdf",
-            "Chapter_1_v9.0.pdf",
-            "Chapter_2_v9.0.pdf",
-            "Computer_Network_Course_Introduction.pdf",
-            "PacketSwitching-CaseStudy-v1-c.pdf",
-          ],
-          folders: { application_socket: { files: [] } },
-        },
-        PPL: {
-          files: [
-            "DCMH.CO3005_Principles of Programming Languages.pdf",
-            "introduction-handout.pdf",
-            "introduction.pdf",
-            "lexical-analysis-handout.pdf",
-            "parser1_handout1.pdf",
-          ],
-          folders: { lexer: { files: [] }, parser: { files: [] } },
-        },
-        QLDA: {
-          files: ["Chương 1 (1).pdf", "Chương 2_A.pdf", "Chương 2_B.pdf"],
-        },
+      const library = {
+        CNPM: [
+          "01_Ch1 Introduction_2025.pdf",
+          "02_Ch2 Software Processes.pdf",
+          "03_Ch3_4 Requirements Engineering_2026.pdf",
+          "2410046 - TrinhQuocAn.pdf",
+          "SE_HK261_TeachingPlan - PLAN.pdf",
+          "spec_cnpm.pdf",
+        ],
+        KTLT: [
+          "01-Introduction_to_Computer.pdf",
+          "02-Basic.pdf",
+          "03-Operations.pdf",
+          "04-Libraries.pdf",
+          "05-Control_Flow_If_else.pdf",
+          "06-Control_Flow_Loop.pdf",
+          "07-Array_Structure_Pointer.pdf",
+          "08-Function.pdf",
+          "09-Recursive.pdf",
+          "10-Class.pdf",
+          "11-Operator overloading and Inheritance.pdf",
+          "12-Template.pdf",
+          "13-Polymorphism.pdf",
+          "14-Vector_Iterator.pdf",
+        ],
+        "Lịch sử Đảng": [
+          "CHUONG 1.pdf",
+          "DCMH.SP1039_History of Vietnamese Communist Party.pdf",
+          "GIÁO TRÌNH_Lịch sử ĐCS VN_NXBCTQG.pdf",
+          "SP1039_CĐR TỪNG CHƯƠNG_TRỌNG TÂM.pdf",
+        ],
+        "Mạng máy tính": [
+          "1_Sample_NetApp.pdf",
+          "Chapter_1_v8.0.pdf",
+          "Chapter_1_v9.0.pdf",
+          "Chapter_2_v9.0.pdf",
+          "Computer_Network_Course_Introduction.pdf",
+          "PacketSwitching-CaseStudy-v1-c.pdf",
+        ],
+        PPL: [
+          "DCMH.CO3005_Principles of Programming Languages.pdf",
+          "introduction-handout.pdf",
+          "introduction.pdf",
+          "lexical-analysis-handout.pdf",
+          "parser1_handout1.pdf",
+        ],
+        QLDA: ["Chương 1 (1).pdf", "Chương 2_A.pdf", "Chương 2_B.pdf"],
       };
-      var root = { folders: library, files: [] };
-      var currentPath = [];
 
-      function getFolder(path) {
-        var folder = root;
-        var index;
-        for (index = 0; index < path.length; index += 1) {
-          folder = folder.folders && folder.folders[path[index]];
-          if (!folder) return root;
+      const items = document.querySelector("#items");
+      const breadcrumb = document.querySelector("#breadcrumb");
+      const viewTitle = document.querySelector("#view-title");
+      const statusbar = document.querySelector("#statusbar");
+      const emptyState = document.querySelector("#empty-state");
+      const searchInput = document.querySelector("#search-input");
+      const backButton = document.querySelector(".back-button");
+      let currentFolder = null;
+
+      const displayName = (fileName) => fileName;
+      const fileUrl = (folder, fileName) =>
+        `pdf/${encodeURIComponent(folder).replace(/%2F/g, "/")}/${encodeURIComponent(fileName)}`;
+
+      function renderBreadcrumb() {
+        breadcrumb.innerHTML = "";
+        const home = document.createElement("button");
+        home.type = "button";
+        home.textContent = "Tài liệu học";
+        home.addEventListener("click", () => showFolders());
+        breadcrumb.append(home);
+        if (currentFolder) {
+          const separator = document.createElement("span");
+          separator.textContent = "/";
+          separator.setAttribute("aria-hidden", "true");
+          breadcrumb.append(separator, document.createTextNode(currentFolder));
         }
-        return folder;
       }
 
-      function fileUrl(path, fileName) {
-        var parts = path.slice(0);
-        parts.push(fileName);
-        return "pdf/" + parts.map(encodeURIComponent).join("/");
-      }
-
-      function matches(name, query) {
-        return name.toLowerCase().indexOf(query) !== -1;
-      }
-
-      function findParent(element, attribute) {
-        while (element && element !== document) {
-          if (element.getAttribute && element.getAttribute(attribute) !== null)
-            return element;
-          element = element.parentNode;
+      function itemTemplate({ name, type, href }) {
+        const item = document.createElement("a");
+        item.className = `item ${type}`;
+        item.href = href || "#";
+        if (type === "folder") {
+          item.addEventListener("click", (event) => {
+            event.preventDefault();
+            showFiles(name);
+          });
+        } else {
+          item.target = "_blank";
+          item.rel = "noopener";
         }
-        return null;
+
+        const icon = document.createElement("span");
+        icon.className = "item-icon";
+        icon.textContent = type === "folder" ? "▰" : "PDF";
+        icon.setAttribute("aria-hidden", "true");
+        const label = document.createElement("span");
+        label.className = "item-name";
+        label.textContent = name;
+        item.append(icon, label);
+        return item;
       }
 
-      function renderSidebar() {
-        var names = Object.keys(library);
-        var html = "";
-        names.forEach(function (name) {
-          html +=
-            '<button class="sidebar-item" type="button" data-path="' +
-            name +
-            '"><span class="folder-icon">⌂</span>' +
-            name +
-            "</button>";
-        });
-        document.getElementById("folder-sidebar").innerHTML = html;
+      function renderItems(data) {
+        items.innerHTML = "";
+        data.forEach((entry) => items.append(itemTemplate(entry)));
+        emptyState.hidden = data.length !== 0;
+        statusbar.textContent = `${data.length} ${data.length === 1 ? "mục" : "mục"}`;
       }
 
-      function render() {
-        var folder = getFolder(currentPath);
-        var query = document
-          .getElementById("search")
-          .value.replace(/^\s+|\s+$/g, "")
-          .toLowerCase();
-        var folderNames = Object.keys(folder.folders || {}).filter(
-          function (name) {
-            return matches(name, query);
-          },
+      function showFolders() {
+        currentFolder = null;
+        viewTitle.textContent = "Các môn học";
+        searchInput.value = "";
+        searchInput.placeholder = "Tìm môn học";
+        backButton.disabled = true;
+        renderBreadcrumb();
+        renderItems(
+          Object.keys(library).map((name) => ({ name, type: "folder" })),
         );
-        var files = (folder.files || []).filter(function (name) {
-          return matches(name, query);
-        });
-        var html = "";
-        var index;
-        for (index = 0; index < folderNames.length; index += 1) {
-          html +=
-            '<button class="file-row" type="button" data-folder="' +
-            folderNames[index] +
-            '"><span class="file-icon folder">⌂</span><span class="file-name">' +
-            folderNames[index] +
-            '</span><span class="file-kind">Thư mục</span><span class="chevron">›</span></button>';
-        }
-        for (index = 0; index < files.length; index += 1) {
-          html +=
-            '<a class="file-row" href="' +
-            fileUrl(currentPath, files[index]) +
-            '" target="_blank" rel="noopener"><span class="file-icon pdf">PDF</span><span class="file-name">' +
-            files[index].replace(/\.pdf$/i, "") +
-            '</span><span class="file-kind">PDF</span><span class="chevron">↗</span></a>';
-        }
-        var breadcrumbs =
-          '<button type="button" data-breadcrumb="">pdf</button>';
-        for (index = 0; index < currentPath.length; index += 1) {
-          breadcrumbs +=
-            '<span>/</span><button type="button" data-breadcrumb="' +
-            currentPath.slice(0, index + 1).join("/") +
-            '">' +
-            currentPath[index] +
-            "</button>";
-        }
-        document.getElementById("breadcrumbs").innerHTML = breadcrumbs;
-        document.getElementById("item-count").textContent =
-          folderNames.length + files.length + " mục";
-        document.getElementById("file-list").innerHTML =
-          html || '<p class="empty">Không tìm thấy tài liệu phù hợp.</p>';
-        var buttons = document.querySelectorAll(".sidebar-item");
-        for (index = 0; index < buttons.length; index += 1) {
-          var active =
-            buttons[index].getAttribute("data-path") === currentPath[0] ||
-            (!currentPath.length && buttons[index].id === "all-folders");
-          if (active) buttons[index].classList.add("active");
-          else buttons[index].classList.remove("active");
-        }
       }
 
-      document.addEventListener("click", function (event) {
-        var folderButton = findParent(event.target, "data-folder");
-        var sidebarButton = findParent(event.target, "data-path");
-        var breadcrumb = findParent(event.target, "data-breadcrumb");
-        var allFolders =
-          event.target.id === "all-folders"
-            ? event.target
-            : findParent(event.target, "id");
-        if (folderButton)
-          currentPath.push(folderButton.getAttribute("data-folder"));
-        if (sidebarButton)
-          currentPath = [sidebarButton.getAttribute("data-path")];
-        if (allFolders && allFolders.id === "all-folders") currentPath = [];
-        if (breadcrumb)
-          currentPath = breadcrumb.getAttribute("data-breadcrumb")
-            ? breadcrumb.getAttribute("data-breadcrumb").split("/")
-            : [];
-        if (
-          folderButton ||
-          sidebarButton ||
-          breadcrumb ||
-          (allFolders && allFolders.id === "all-folders")
-        )
-          render();
+      function showFiles(folder) {
+        currentFolder = folder;
+        viewTitle.textContent = folder;
+        searchInput.value = "";
+        searchInput.placeholder = "Tìm tài liệu";
+        backButton.disabled = false;
+        renderBreadcrumb();
+        renderItems(
+          library[folder].map((name) => ({
+            name: displayName(name),
+            type: "file",
+            href: fileUrl(folder, name),
+          })),
+        );
+      }
+
+      searchInput.addEventListener("input", () => {
+        const query = searchInput.value.trim().toLocaleLowerCase("vi");
+        const source = currentFolder
+          ? library[currentFolder].map((name) => ({
+              name: displayName(name),
+              type: "file",
+              href: fileUrl(currentFolder, name),
+            }))
+          : Object.keys(library).map((name) => ({ name, type: "folder" }));
+        renderItems(
+          source.filter(({ name }) =>
+            name.toLocaleLowerCase("vi").includes(query),
+          ),
+        );
       });
-      document.getElementById("search").addEventListener("input", render);
-      renderSidebar();
-      render();
+
+      backButton.addEventListener("click", showFolders);
+      showFolders();
     </script>
   </body>
 </html>
