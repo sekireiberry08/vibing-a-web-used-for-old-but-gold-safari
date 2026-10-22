@@ -1,0 +1,403 @@
+\documentclass[a4paper,12pt]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[vietnamese]{babel}
+\usepackage[T5]{fontenc}
+\usepackage[left=3.00cm, right=2.0cm, top=2.00cm, bottom=2.5cm]{geometry}
+\usepackage[fontsize=13]{fontsize}
+\usepackage{indentfirst}
+\usepackage{setspace}
+\renewcommand{\baselinestretch}{1.2}
+
+\usepackage{amsmath, amssymb}
+\usepackage{newtxmath}
+\usepackage{gensymb, textcomp}
+
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage{makecell}
+\usepackage{tabularx}
+\usepackage{longtable}
+\usepackage{adjustbox}
+\usepackage{array}
+\usepackage{caption}
+\usepackage{float}
+\usepackage{xcolor}
+\usepackage{tikz}
+\usetikzlibrary{arrows, backgrounds}
+\usepackage{fancybox}
+\usepackage{mdframed}
+\usepackage{tcolorbox}
+
+\usepackage{listings}
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+\lstset{
+    backgroundcolor=\color{backcolour},   
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{blue},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\small,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=5pt,                   
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=2,
+    language=Java
+}
+
+\usepackage{enumitem}
+
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=black,
+    citecolor=black,
+    urlcolor=blue
+}
+
+\usepackage{fancyhdr}
+\usepackage{lastpage}
+\pagestyle{fancy}
+\fancyhf{} 
+
+\setlength{\headheight}{40pt}
+\setlength{\footskip}{20pt}
+
+\fancyhead[L]{
+    \begin{tabular}{rl}
+        \begin{picture}(25,15)(0,0)
+            \put(0,-8){\includegraphics[width=8mm, height=8mm]{img/logo.png}}
+        \end{picture} &
+        \begin{tabular}{l}
+            \textbf{\ttfamily TRƯỜNG ĐẠI HỌC BÁCH KHOA - ĐHQG TPHCM}\\
+            \textbf{\ttfamily KHOA KHOA HỌC VÀ KỸ THUẬT MÁY TÍNH}
+        \end{tabular}
+    \end{tabular}
+}
+\fancyhead[R]{}
+
+\fancyfoot[L]{\scriptsize \ttfamily QUẢN LÝ DỰ ÁN DÀNH CHO KỸ SƯ - L01}
+\fancyfoot[R]{\scriptsize \ttfamily Trang \thepage/\pageref{LastPage}}
+
+\renewcommand{\headrulewidth}{0.3pt}
+\renewcommand{\footrulewidth}{0.3pt}
+
+\usepackage{tocloft}
+\renewcommand{\cftbeforesecskip}{4pt}
+\renewcommand{\cftbeforesubsecskip}{2pt}
+\renewcommand{\cftbeforesubsubsecskip}{1pt}
+\renewcommand{\cftsecnumwidth}{2em}
+\renewcommand{\cftsubsecnumwidth}{3em}
+\renewcommand{\cftsubsubsecnumwidth}{4em}
+\renewcommand{\cftdotsep}{1}
+
+\setcounter{secnumdepth}{4}
+\setcounter{tocdepth}{3}
+
+\makeatletter
+\newcounter{subsubsubsection}[subsubsection]
+\renewcommand\thesubsubsubsection{\thesubsubsection.\@alph\c@subsubsubsection}
+\newcommand\subsubsubsection{\@startsection{subsubsubsection}{4}{\z@}%
+{-3.25ex\@plus -1ex \@minus -.2ex}%
+{1.5ex\@plus .2ex}%
+{\normalfont\normalsize\bfseries}}
+\newcommand*\l@subsubsubsection{\@dottedtocline{3}{10.0em}{4.1em}}
+\newcommand*{\subsubsubsectionmark}[1]{}
+\makeatother
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{4pt}
+
+\begin{document}
+
+\pagenumbering{alph} % Tránh trùng lặp identifier trang với titlepage
+
+\begin{titlepage}
+\newgeometry{left=1.00cm, right=2.0cm, top=1.00cm, bottom=1.50cm}
+\thispagestyle{empty}
+
+\thisfancypage{
+    \setlength{\fboxsep}{0pt}
+    \setlength{\fboxrule}{2pt}
+    \doublebox}{}
+
+\begin{center}
+\vspace*{1.2em}
+
+{\fontsize{13pt}{15.6pt}\selectfont \bf ĐẠI HỌC QUỐC GIA THÀNH PHỐ HỒ CHÍ MINH}\\[1ex]
+{\fontsize{13pt}{15.6pt}\selectfont \bf TRƯỜNG ĐẠI HỌC BÁCH KHOA}\\[1ex]
+
+\vspace{0.8cm}
+
+\includegraphics[scale=0.09]{img/logo.png} 
+
+\vspace{0.8cm}
+
+\begin{tabular}{c}
+    \textbf{{BÁO CÁO BÀI TẬP NHÓM}}\\[0.8em]
+    \textbf{\large Môn: QUẢN LÝ DỰ ÁN CHO KỸ SƯ}\\[0.8em]
+    \hline
+    \\
+        \textbf{\Large Đề tài:}\\
+
+    \textbf{\Large KINH DOANH QUÁN CAFE}\\
+    \textbf{\Large KẾT HỢP KHÔNG GIAN LÀM VIỆC}\\
+    \\
+    \hline
+\end{tabular}
+
+\vspace{0.4cm}
+
+\begin{center}
+    \textbf{\large Lớp: L01 - Nhóm: 2 - HK: 261}\\
+    \textbf{\large GVHD: TS. Hàng Lê Cẩm Phương}
+    \vspace{0.2cm}
+    \begin{table}[h!]
+    \renewcommand{\arraystretch}{1.3}
+    \centering
+    \small
+    \begin{tabular}{|c|c|c|c|}
+        \hline
+        \textbf{STT} & \textbf{MSSV} & \textbf{Họ và tên} & \textbf{Đánh giá} \\
+        \hline
+        1 & 2410046 & Trịnh Quốc An & \\
+        \hline
+        2 & 22310133 & Nguyễn Vũ Mai Anh & \\
+        \hline
+        3 & 22410612 & Nguyễn Văn Dũng & \\
+        \hline
+        4 & 22513789 & Nguyễn Văn Thiện Khoa & \\
+        \hline
+        5 & 22412146 & Trần Nguyễn Trà My & \\
+        \hline
+        6 & 22312836 & Nguyễn Hoàng Minh Quân & \\
+        \hline
+        7 & 22413300 & Trương Đình Thiện & \\
+        \hline
+        8 & 22413416 & Mai Hoàng Thiên Thư & \\
+        \hline
+        9 & 22413641 & Nguyễn Minh Trí & \\
+        \hline
+        10 & 22413693 & Huỳnh Thiện Trung & \\
+        \hline
+    \end{tabular}
+\end{table}
+\end{center}
+
+{Thành phố Hồ Chí Minh — Tháng 10 năm 2026}
+
+\end{center}
+\end{titlepage}
+\restoregeometry
+
+\pagenumbering{arabic} % Đặt lại đánh số trang chuẩn
+\newpage
+\pagestyle{fancy}
+\tableofcontents
+\newpage
+
+\section{Giới thiệu Dự án}
+\subsection{Tên Dự án}
+\subsection{Mục tiêu Dự án}
+\subsection{Lý do chọn đề tài}
+\subsection{Tóm tắt ngắn gọn}
+
+\section{Lập kế hoạch dự án}
+\subsection{Phạm vi dự án}
+\subsubsection{Phân tích phạm vi thực hiện công việc, nguồn tài nguyên cần thiết}
+Quá trình hình thành và phát triển mô hình quán cafe kết hợp không gian làm việc sẽ được chia thành các cột mốc cụ thể: từ khâu nghiên cứu thị hiếu khách hàng, lên bản vẽ thi công, setup không gian, cho đến công tác tuyển dụng và vận hành chạy thử nghiệm (soft-opening).
+
+Để hiện thực hóa các giai đoạn này, dự án đòi hỏi sự tập hợp của nhiều nguồn lực đa dạng. Về nền tảng vật chất, dự án cần đảm bảo mặt bằng kinh doanh đáp ứng tiêu chuẩn diện tích, nguồn cung vật tư xây dựng, hệ thống nội thất công thái học (bàn, ghế chống gù, hệ thống kệ sách) và các trang thiết bị pha chế chuyên dụng. Về nền tảng kỹ thuật và dịch vụ, hệ thống hạ tầng viễn thông (Internet băng thông rộng, ổ cắm điện cá nhân hóa), phần mềm quản lý bán hàng (POS) và ngân sách phục vụ các chiến dịch marketing là những tài nguyên không thể thiếu để tạo ra lợi thế cạnh tranh.
+\subsubsection{Dự báo các khó khăn, phòng ngừa rủi ro}
+Quá trình triển khai dự án có thể đối mặt với một số thách thức khách quan và chủ quan, điển hình như: sự biến động thất thường của giá vật liệu thi công, nguy cơ vượt ngân sách đầu tư ban đầu, sự chậm trễ từ các nhà thầu phụ, hoặc áp lực cạnh tranh gay gắt từ các thương hiệu hiện hữu trên thị trường.
+
+Để giảm thiểu các rủi ro này, ban quản lý dự án cần thiết lập một quỹ dự phòng rủi ro (thường chiếm 10-15\% tổng ngân sách), ký kết hợp đồng ràng buộc chặt chẽ các điều khoản về tiến độ với đơn vị cung ứng và giám sát sát sao thực địa công trình. Song song đó, các chiến dịch truyền thông đa kênh cần được khởi động sớm để định vị thương hiệu và xây dựng tệp khách hàng tiềm năng trước thềm khai trương nhằm đảm bảo dòng tiền ngay khi đi vào hoạt động.
+\subsubsection{Giới hạn phạm vi dự án (Project Exclusions)}
+Để đảm bảo nguồn lực không bị phân tán và tránh hiện tượng "tràn viền phạm vi" (Scope Creep), dự án này thiết lập các giới hạn rõ ràng về những công việc không thuộc phạm vi quản lý của ban dự án:
+\begin{itemize}
+    \item \textbf{Giai đoạn kết thúc: }Dự án chính thức khép lại tại cột mốc tổ chức khai trương (Grand Opening) và bàn giao toàn bộ cơ sở vật chất cho đội ngũ vận hành.
+    \item \textbf{Hoạt động vận hành (Operations):} Các công việc mang tính chất lặp lại hàng ngày sau khai trương như: nhập nguyên liệu tiêu hao định kỳ, chi trả lương nhân viên, bảo trì thiết bị sau thời gian bảo hành, hoặc xử lý khủng hoảng truyền thông trong quá trình kinh doanh sẽ không nằm trong phạm vi dự án này.
+    \item \textbf{Phạm vi không gian: }Dự án chỉ bao gồm việc thiết kế và cải tạo trong phạm vi ranh giới mặt bằng đã thuê, không bao gồm việc xử lý hoặc nâng cấp cảnh quan công cộng bên ngoài vỉa hè (trừ khu vực bảng hiệu và chỗ để xe theo quy định)
+\end{itemize}
+
+\subsection{Các hạng mục chính}
+\subsubsection{Thiết lập nguồn lực}
+Hệ thống nguồn lực của dự án được phân bổ tập trung vào ba trụ cột chính: Tài chính, Con người và Công nghệ. Đầu tiên, ban quản trị cần hoạch định chi tiết các khoản chi cho việc thuê mặt bằng, cải tạo không gian, mua sắm máy móc và ngân sách lưu động.
+
+Đối với nguồn nhân lực, đội ngũ vận hành cốt lõi sẽ bao gồm quản lý cửa hàng, chuyên viên pha chế (barista), nhân viên phục vụ và bộ phận hỗ trợ kỹ thuật. Toàn bộ nhân sự bắt buộc phải trải qua quy trình đào tạo (training) khắt khe về kỹ năng nghiệp vụ và thái độ phục vụ trước khi chính thức tiếp xúc với khách hàng. 
+
+Về yếu tố công nghệ, các công cụ số như phần mềm POS, hệ thống tích điểm khách hàng và nền tảng quản trị mạng lưới Wi-Fi sẽ được thiết lập ngay từ đầu để tối ưu hóa quy trình vận hành và nâng cao trải nghiệm người dùng.
+
+\subsubsection{Phối hợp và kiểm soát thời gian, chi phí, chất lượng}
+Nhằm đảm bảo dự án bám sát tiến độ đề ra, ban quản lý sẽ áp dụng các công cụ quản lý dự án trực quan như sơ đồ Gantt hoặc Phương pháp Đường găng (CPM) để theo dõi các mốc thời gian quan trọng.
+
+Dòng tiền của dự án được kiểm soát chặt chẽ thông qua việc đối chiếu liên tục giữa bảng dự toán ban đầu và chi phí giải ngân thực tế, từ đó đưa ra các điều chỉnh kịp thời. 
+
+Yếu tố chất lượng được cam kết bằng cách ban hành các bộ quy chuẩn cụ thể cho từng hạng mục thi công: từ quy cách thiết kế nội thất, tiêu chuẩn nhập nguyên liệu hạt cà phê, cho đến bộ quy tắc ứng xử chuẩn dành cho nhân viên. Việc thanh tra và đánh giá thường xuyên sẽ giúp phát hiện sớm các sai lệch để khắc phục nhanh chóng.
+
+Đặc biệt, để đánh giá mức độ hoàn thành phạm vi công việc và làm cơ sở thanh lý hợp đồng với các nhà thầu, dự án thiết lập bộ tiêu chí nghiệm thu (Acceptance Criteria) với các thông số định lượng bắt buộc như sau:
+\begin{itemize}
+    \item \textbf{Về không gian và công năng:} Hoàn thiện tối thiểu 50 chỗ ngồi làm việc cá nhân với nội thất công thái học (bàn ghế đúng tiêu chuẩn chống gù, chống cận). Thiết lập 02 phòng họp nhóm (meeting room) với sức chứa 4-6 người/phòng, đảm bảo tiêu chuẩn vách ngăn cách âm.
+    \item \textbf{Về hạ tầng kỹ thuật và công nghệ: }Hệ thống mạng Wi-Fi Mesh phải phủ sóng 100\% diện tích mặt sàn kinh doanh, cam kết tốc độ băng thông thực tế đạt tối thiểu 150 Mbps trong điều kiện tải tối đa (stress test). 100\% vị trí bàn làm việc phải được tiếp cận với hệ thống ổ cắm điện hoặc cổng sạc cá nhân trong bán kính tối đa 1 mét, đảm bảo an toàn phòng chống cháy nổ.
+    \item \textbf{Về trang thiết bị và dịch vụ đi kèm: }Góc thư viện hoàn thiện hệ thống kệ áp tường, nghiệm thu đầu vào tối thiểu 200 đầu sách thuộc các lĩnh vực chuyên môn, kỹ năng mềm và khởi nghiệp. Hệ thống máy pha chế, tủ lạnh và phần mềm máy tính tiền (POS) vận hành trơn tru, không phát sinh lỗi hệ thống trong suốt 6 ngày vận hành thử (Soft-opening).
+    \item \textbf{Về hồ sơ bàn giao: }Bàn giao đầy đủ 100\% bản vẽ hoàn công, chứng từ bảo hành thiết bị và sổ tay hướng dẫn vận hành cho đội ngũ quản lý cửa hàng trước thềm khai trương (Grand Opening).
+\end{itemize}
+\subsubsection{Cung cấp dữ liệu}
+Hệ thống thông tin và dữ liệu của dự án phải được cập nhật, lưu trữ liên tục để làm cơ sở cho việc ra quyết định. Các luồng dữ liệu cần thu thập bao gồm: biên bản nghiệm thu tiến độ công trình, báo cáo dòng tiền, số liệu khảo sát phản hồi của khách hàng trong tuần lễ chạy thử, và bảng theo dõi hiệu suất nhân viên.
+
+Hệ sinh thái công nghệ bao gồm máy tính tiền POS, phần mềm Quản lý quan hệ khách hàng (CRM) và các công cụ lưu trữ đám mây (như Google Workspace, Excel) sẽ đóng vai trò trung tâm trong việc tổng hợp, phân tích số liệu. Nguồn dữ liệu minh bạch này giúp chủ đầu tư kịp thời tinh chỉnh menu, thay đổi chiến lược marketing và tối ưu hóa chi phí vận hành.
+
+\subsection{Thông tin sơ đồ dự án}
+
+
+\begingroup
+\renewcommand{\arraystretch}{1.5}
+\setlength{\tabcolsep}{6pt}
+\setlength{\LTpre}{0pt}
+\setlength{\LTpost}{0pt}
+
+\begin{longtable}{
+    |>{\raggedright\arraybackslash}p{\dimexpr(\textwidth-8\tabcolsep-5\arrayrulewidth)/4\relax}
+    |>{\raggedright\arraybackslash}p{\dimexpr(\textwidth-8\tabcolsep-5\arrayrulewidth)/4\relax}
+    |>{\raggedright\arraybackslash}p{\dimexpr(\textwidth-8\tabcolsep-5\arrayrulewidth)/4\relax}
+    |>{\raggedright\arraybackslash}p{\dimexpr(\textwidth-8\tabcolsep-5\arrayrulewidth)/4\relax}|
+}
+\caption{Danh sách công tác và thời gian thực hiện dự án}
+\label{tab:cong-tac-du-an}\\
+\hline
+& \textbf{Công tác}
+& \textbf{Công tác trước}
+& \textbf{Thời gian thực hiện (Ngày)} \\
+\hline
+\endfirsthead
+
+
+\hline
+\multicolumn{4}{r}{\textit{Tiếp tục ở trang sau}}\\
+\endfoot
+
+\hline
+\endlastfoot
+
+\multicolumn{4}{|c|}{\textbf{Giai đoạn 1: Chuẩn bị và Thiết kế}} \\
+\hline
+1.1 Khảo sát thực địa và lên phương án concept sơ bộ & A & - & 3 \\
+\hline
+1.2 Đàm phán, chốt mặt bằng và ký hợp đồng thuê & B & A & 4 \\
+\hline
+1.3 Thống nhất phương án kiến trúc và bản vẽ thô & C & B & 5 \\
+\hline
+1.4 Hoàn thiện bản vẽ thiết kế nội thất chi tiết & D & C & 4 \\
+\hline
+1.5 Dựng phối cảnh 3D toàn bộ không gian quán & E & D & 4 \\
+\hline
+1.6 Chốt danh mục vật liệu thi công và màu sắc chủ đạo & F & D & 2 \\
+\hline
+1.7 Lập bảng dự toán chi phí thi công tổng thể & G & D & 3 \\
+\hline
+
+\multicolumn{4}{|c|}{\textbf{Giai đoạn 2: Cải tạo và Xây dựng phần thô}} \\
+\hline
+2.1 Phá dỡ, dọn dẹp mặt bằng cũ và xử lý nền móng & H & F, G & 4 \\
+\hline
+2.2 Thi công đi dây hệ thống điện âm tường, cấp thoát nước & I & H & 5 \\
+\hline
+2.3 Thi công đóng trần thạch cao, ốp vách, sơn bả tường & J & I & 16 \\
+\hline
+2.4 Rà soát lỗi thi công thô, xử lý dặm vá các chi tiết & K & J & 6 \\
+\hline
+2.5 Lắp đặt thiết bị cơ điện gắn tường (đèn, ổ cắm, router) & L & K & 3 \\
+\hline
+2.6 Kiểm tra áp lực nước và thử nghiệm chống thấm & M & K & 2 \\
+\hline
+
+\multicolumn{4}{|c|}{\textbf{Giai đoạn 3: Hoàn thiện nội thất \& Setup trang thiết bị}} \\
+\hline
+3.1 Vận chuyển, lắp ráp hệ thống bàn ghế, kệ sách áp tường & N & K & 6 \\
+\hline
+3.2 Lắp đặt thiết bị quầy pha chế (máy pha cafe, tủ lạnh, POS) & O & K & 5 \\
+\hline
+3.3 Thi công mảng xanh, bố trí hệ thống cây cảnh sinh thái & P & K & 3 \\
+\hline
+3.4 Decor chi tiết (treo tranh ảnh, gắn biển hiệu, đèn thả) & Q & N, O, P & 5 \\
+\hline
+3.5 Sàng lọc, lên danh mục và nhập sách cho góc thư viện & R & P & 4 \\
+\hline
+3.6 Phân loại đầu sách và sắp xếp trực tiếp lên kệ & S & R & 2 \\
+\hline
+3.7 In ấn menu, bảng hướng dẫn và bảng nội quy không gian & T & S & 2 \\
+\hline
+
+\multicolumn{4}{|c|}{\textbf{Giai đoạn 4: Nghiệm thu và Đưa vào hoạt động}} \\
+\hline
+4.1 Vệ sinh công nghiệp và nghiệm thu toàn bộ công trình & U & Q, T, L, M & 3 \\
+\hline
+4.2 Thực hiện thanh quyết toán và thanh lý hợp đồng thầu & V & U & 4 \\
+\hline
+4.3 Tập hợp hồ sơ lưu trữ, chứng từ và bản vẽ hoàn công & W & V & 2 \\
+\hline
+4.4 Lập báo cáo tổng kết giai đoạn setup và đối chiếu chi phí & X & W & 2 \\
+\hline
+4.5 Đào tạo nhân sự thực chiến, vận hành thử (Soft-opening) & Y & X & 6 \\
+\hline
+4.6 Đánh giá lại quy trình và tổ chức khai trương (Grand Opening) & Z & Y & 2 \\
+\hline
+\end{longtable}
+\endgroup
+
+\subsubsection{Danh sách công việc và mối quan hệ phụ thuộc}
+\subsubsection{Mốc thời gian và tiến độ thực hiện}
+
+\subsection{Phân bổ Nguồn lực}
+\subsubsection{Nhân lực}
+\subsubsection{Ngân sách}
+
+\subsection{Kế hoạch Kiểm tra \& Đánh giá (Testing \& Evaluation Plan)}
+\subsubsection{Phương pháp kiểm tra}
+\subsubsection{Tiêu chí đánh giá}
+
+\subsection{Kế hoạch Quản lý Rủi ro}
+\subsubsection{Xác định và phân tích rủi ro}
+\subsubsection{Biện pháp phòng ngừa và xử lý}
+
+\section{Kết luận}
+\subsection{Tóm tắt kế hoạch dự án}
+\subsection{Tính khả thi và tầm quan trọng}
+\subsection{Bài học kinh nghiệm}
+
+\section{Phụ lục}
+
+\clearpage
+\renewcommand{\refname}{Tài liệu tham khảo}
+\begin{thebibliography}{99}
+
+\bibitem{pmi2021}
+Viện Quản lý Dự án (PMI) (2021),
+\textit{A Guide to the Project Management Body of Knowledge (PMBOK\textsuperscript{\textregistered} Guide) -- Seventh Edition}.
+Project Management Institute.
+
+\bibitem{dongxuanDam2018}
+Đồng Xuân Đảm (2018),
+\textit{Giáo trình Quản trị Dự án Đầu tư}.
+NXB Đại học Kinh tế Quốc dân.
+
+\bibitem{phanThao2020}
+Phan T. Thảo (2020),
+\textit{Khởi sự kinh doanh nhà hàng và quán cà phê}.
+NXB Kinh tế TP.HCM.
+
+\end{thebibliography}
+
+
+\end{document}
